@@ -1,20 +1,30 @@
+export interface ITaskDetails {
+  _Name: string;
+  _Description: string;
+}
+
 export class TaskDetails {
-  private Name: string = "";
-  private Description: string = "";
+  private _Name: string = "";
+  private _Description: string = "";
 
-  set name(_Name: string) {
-    this.Name = _Name;
+  constructor(_Name: string, _Description: string) {
+    this._Name = _Name;
+    this._Description = _Description;
   }
 
-  get name(): string {
-    return this.Name;
+  set Name(_Name: string) {
+    this._Name = _Name;
   }
 
-  set description(_Description: string) {
-    this.Description = _Description;
+  get Name(): string {
+    return this._Name;
   }
 
-  get description(): string {
-    return this.Description;
+  set Description(_Description: string) {
+    this._Description = _Description;
+  }
+
+  get Description(): string {
+    return this._Description;
   }
 }

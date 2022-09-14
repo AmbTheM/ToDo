@@ -1,35 +1,43 @@
+export interface ITaskDates {
+  _CreatedAt: Date;
+  _Deadline: Date;
+  _FinishedAt: Date;
+}
+
 export class TaskDates {
-  private CreatedAt: Date;
-  private Deadline: Date = new Date(0);
-  private FinishedAt: Date = new Date(0);
+  private _CreatedAt: Date;
+  private _Deadline: Date;
+  private _FinishedAt: Date;
 
-  constructor() {
-    this.CreatedAt = new Date();
+  constructor(_Deadline: Date) {
+    this._CreatedAt = new Date();
+    this._Deadline = _Deadline;
+    this._FinishedAt = new Date(0);
   }
 
-  set deadline(_Deadline: Date) {
-    this.Deadline = new Date(_Deadline.getTime());
+  set Deadline(_Deadline: Date) {
+    this._Deadline = new Date(_Deadline.getTime());
   }
 
-  get deadline(): Date {
-    return this.Deadline;
+  get Deadline(): Date {
+    return this._Deadline;
   }
 
-  get createdat(): Date {
-    return this.CreatedAt;
+  get CreatedAt(): Date {
+    return this._CreatedAt;
   }
 
-  set finishedat(_FinsihedAt: Date) {
-    this.FinishedAt = new Date(_FinsihedAt.getTime());
+  set FinishedAt(_FinsihedAt: Date) {
+    this._FinishedAt = new Date(_FinsihedAt.getTime());
   }
 
-  get finsihedat(): Date {
-    return this.FinishedAt;
+  get FinishedAt(): Date {
+    return this._FinishedAt;
   }
 
   timeRemaining(): number {
     let current: Date = new Date();
 
-    return current.getTime() - this.Deadline.getTime();
+    return this._Deadline.getTime() - current.getTime();
   }
 }
