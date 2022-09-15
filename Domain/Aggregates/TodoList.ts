@@ -1,4 +1,5 @@
 import { Task } from "../Entities/Task.entity";
+import { User } from "../Entities/User.entity";
 import { ITaskDates } from "../ValueObjects/TaskDates.obj";
 import { ITaskDetails } from "../ValueObjects/TaskDetails.obj";
 

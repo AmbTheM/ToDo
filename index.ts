@@ -1,10 +1,15 @@
-import { TodoList } from "./Domain/Aggregates/TodoList";
+import express from "express";
+import mongoose from "mongoose";
+import http from "http";
+import { config } from "./Config/config";
 
-const myList = new TodoList();
-const date = new Date(Date.now());
-myList.AddNewTask("help", "dfadsf", new Date(Date.now() + 172800000));
-myList.AddNewTask("help", "dfadsf", new Date(Date.now() + 100));
-myList.AddNewTask("help", "dfadsf", new Date(Date.now() + 12334));
-const copy = myList.getList();
+const router = express();
 
-console.log(myList.getDetails(copy[0].id)._Name);
+mongoose
+  .connect(config.mongo.url)
+  .then(() => {
+    console.log("connected");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
