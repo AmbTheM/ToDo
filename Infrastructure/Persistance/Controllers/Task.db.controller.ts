@@ -39,7 +39,7 @@ const readTask = (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => res.status(500).json({ error }));
 };
 const readAllTasks = (req: Request, res: Response, next: NextFunction) => {
-  return TaskDb.find()
+  return TaskDb.find({ UserId: req.params.userID })
     .then((task) => {
       task
         ? res.status(200).json({ task })

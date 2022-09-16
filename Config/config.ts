@@ -1,10 +1,11 @@
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: __dirname + "/../.env" });
 
-const MONGO_DB_USERNAME = process.env.MONGO_DB_USERNAME || "";
-const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD || "";
-const MONGO_DB_URL = `mongodb+srv://ahmadadmin:ahmadadmin@todo.kwmhcg2.mongodb.net/retryWrites=true&w=majority`;
+const MONGO_DB_USERNAME: string = process.env.MONGO_USERNAME || "";
+const MONGO_DB_PASSWORD: string = process.env.MONGO_PASSWORD || "";
+const MONGO_DB_URL: string = `mongodb+srv://${MONGO_DB_USERNAME}:${MONGO_DB_PASSWORD}@todo.kwmhcg2.mongodb.net/retryWrites=true&w=majority`;
+const API_URL: string = process.env.API_URL || "";
 
 const SERVER_PORT = process.env.SERVER_PORT
   ? Number(process.env.SERVER_PORT)
@@ -16,5 +17,6 @@ export const config = {
   },
   server: {
     port: SERVER_PORT,
+    url: API_URL,
   },
 };

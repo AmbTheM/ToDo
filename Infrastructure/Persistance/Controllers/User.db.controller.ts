@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import UserDb from "../Models/User.db.model";
 const createUser = (req: Request, res: Response, next: NextFunction) => {
-  const { Username, Password, id } = req.body;
+  const { Username, Password, Email, id } = req.body;
 
   const user = new UserDb({
     _id: id,
     Username: Username,
     Password: Password,
+    Email: Email,
   });
 
   return user

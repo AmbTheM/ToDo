@@ -6,8 +6,13 @@ export class User extends EntityBase {
   private _Password: string;
   private _Email: Email;
 
-  constructor(_Username: string, _Password: string, _Email: string) {
-    super();
+  constructor(
+    _Username: string,
+    _Password: string,
+    _Email: string,
+    id: string = ""
+  ) {
+    super(id);
 
     this._Username = _Username;
     this._Password = _Password;

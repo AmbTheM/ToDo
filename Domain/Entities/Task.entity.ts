@@ -7,8 +7,13 @@ export class Task extends EntityBase {
   private TaskDates: TaskDates;
   private isFinished: Boolean = false;
 
-  constructor(TaskName: string, TaskDescription: string, TaskDeadline: Date) {
-    super();
+  constructor(
+    TaskName: string,
+    TaskDescription: string,
+    TaskDeadline: Date,
+    id: string = ""
+  ) {
+    super(id);
     this.TaskDetails = new TaskDetails(TaskName, TaskDescription);
     this.TaskDates = new TaskDates(TaskDeadline);
   }
