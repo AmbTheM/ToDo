@@ -1,16 +1,16 @@
-import { IDBPort } from "../Ports/DB.port";
-import { config } from "../Config/config";
 import axios from "axios";
+import { APIError } from "../../../../Exceptions/APIErrors";
+import { IDBPort } from "../../../../Ports/DB.port";
 
-export abstract class DbAdapter<T> implements IDBPort<T> {
-  APIURL: string = `${config.server.url}:${config.server.port}`;
+export abstract class DbAPI<T> implements IDBPort<T> {
+  APIURL: string = `http://localhost:9090`;
   protected route: string = "";
 
   async readAllFromDb(): Promise<any> {
     const response: any = await axios
       .get(`${this.APIURL}/${this.route}/get`)
       .catch((err) => {
-        console.error(err);
+        throw new Error(err);
       });
 
     return response.data[this.route];
@@ -20,7 +20,7 @@ export abstract class DbAdapter<T> implements IDBPort<T> {
     const response: any = await axios
       .get(`${this.APIURL}/${this.route}/get/${id}`)
       .catch((err) => {
-        console.error(err);
+        throw new Error(err);
       });
     return response.data[this.route];
   }
@@ -29,7 +29,7 @@ export abstract class DbAdapter<T> implements IDBPort<T> {
     const response: any = await axios
       .post(`${this.APIURL}/${this.route}/create`, obj)
       .catch((err) => {
-        console.error(err);
+        throw new APIError(err.response.data.message);
       });
     console.log(response.status);
   }
@@ -38,7 +38,7 @@ export abstract class DbAdapter<T> implements IDBPort<T> {
     const response: any = await axios
       .delete(`${this.APIURL}/${this.route}/delete/${id}`)
       .catch((err) => {
-        console.error(err);
+        throw new Error(err);
       });
     console.log(response.status);
   }
@@ -47,8 +47,12 @@ export abstract class DbAdapter<T> implements IDBPort<T> {
     const response: any = await axios
       .patch(`${this.APIURL}/${this.route}/update/${id}`, obj)
       .catch((err) => {
-        console.error(err);
+        throw new Error(err);
       });
     console.log(response.status);
+  }
+
+  async findByProperty(Property: string, Query: string) {
+    return "Not Impletmented";
   }
 }

@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
+import { store } from "./Redux/configureStore";
 import App from "./App";
 import { hot } from "react-hot-loader/root";
 const ReactApp = process.env.NODE_ENV === "development" ? hot(App) : App;
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReactApp />
+    <ReduxProvider store={store}>
+      <ReactApp />
+    </ReduxProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

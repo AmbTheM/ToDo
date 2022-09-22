@@ -56,7 +56,7 @@ const config = {
             loader: "css-loader",
             options: {
               sourceMap: true,
-              modules: false,
+              modules: true,
             },
           },
           {

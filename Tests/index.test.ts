@@ -1,5 +1,3 @@
-import { TaskDbAdapter } from "../Adapters/Task.DB.adapter";
-import { UserDbAdapter } from "../Adapters/User.DB.adapter";
 import { TodoList } from "../Domain/Aggregates/TodoList";
 import { Task } from "../Domain/Entities/Task.entity";
 import { User } from "../Domain/Entities/User.entity";
@@ -7,23 +5,7 @@ import { Email } from "../Domain/ValueObjects/Email.obj";
 import { ITask } from "../DTO/Task.DTO";
 import { IUser } from "../DTO/User.DTO";
 
-describe("Test if finish task function works", () => {
-  const myList: TodoList = new TodoList();
-  myList.AddNewTask(
-    "Get some groceries",
-    "Go to local shop and buy some onions and milk",
-    new Date(Date.now() + 86400000)
-  );
-  let listoftask = myList.getList();
-  myList.FinishTask(listoftask[0].id);
-  listoftask = myList.getList();
-
-  it("Should return as finished", () => {
-    expect(listoftask[0].getIsFinished()).toBeTruthy;
-  });
-});
-
-describe("Check if email verification works", () => {
+/*describe("Check if email verification works", () => {
   it("should throw an error", () => {
     let myMail: Email;
     expect(() => {
@@ -53,7 +35,7 @@ describe("Ccheck if Databse works correctly", () => {
   });
 
   it("Should place into database succesfully", async () => {
-    const myDb = new TaskDbAdapter();
+    const myDb = new TaskDbAdapter("547ebbef-b626-43e9-acfe-5102e705503b");
     const myTask: Task = new Task(
       "Buy boba tea asap",
       "quench your thirst boy",
@@ -73,5 +55,7 @@ describe("Ccheck if Databse works correctly", () => {
     const data = await myDb.readFromDb(myTask.ID);
 
     expect(data.TaskName).toBe(myTask.getTaskDetails().Name);
-  });
-});
+  }); */
+
+describe("Check if MVC is working correctly", () => {});
+///});

@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import { v4 as uuidv4 } from "uuid";
 
 export abstract class EntityBase {
   id: string = "";
@@ -12,6 +12,6 @@ export abstract class EntityBase {
   }
 
   generateID() {
-    this.id = crypto.randomUUID();
+    this.id = uuidv4();
   }
 }

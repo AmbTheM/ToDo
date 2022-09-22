@@ -13,10 +13,15 @@ export class Email {
     this._value = _value;
   }
 
-  Verify(value: string): boolean {
-    const flag = value.search("@");
+  validateEmail = (email: string) => {
+    const re: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
 
-    if (flag < 0) {
+  Verify(value: string): boolean {
+    const flag = this.validateEmail(value);
+
+    if (!flag) {
       throw new Error("Invalid Email");
       return false;
     } else {
