@@ -5,6 +5,7 @@ import Button from "../../Components/Button";
 import { useUserAPI } from "../../Services/useUserAPI";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/configureStore";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const RegisterPage: React.FC = () => {
   const { AuthenticateUser, CreateUser } = useUserAPI();
@@ -12,8 +13,7 @@ const RegisterPage: React.FC = () => {
   const [username, setusername] = useState<string>("");
   const [password, setpassword] = useState<string>("");
   const [email, setemail] = useState<string>("");
-
-  const Submit = (username: string, password: string) => {};
+  const navigate: NavigateFunction = useNavigate();
 
   return (
     <>
@@ -68,7 +68,7 @@ const RegisterPage: React.FC = () => {
             style={style.button}
             text={"Cancel"}
             onClick={() => {
-              alert("Currently not working");
+              navigate("/");
             }}
           ></Button>
         </div>

@@ -6,16 +6,21 @@ export class Task extends EntityBase {
   private TaskDetails: TaskDetails;
   private TaskDates: TaskDates;
   private isFinished: Boolean = false;
+  private _UserID: string;
 
   constructor(
     TaskName: string,
     TaskDescription: string,
-    TaskDeadline: Date,
-    id: string = ""
+    TaskDeadline: string,
+    UserID: string,
+    id: string = "",
+    TaskCreatedAt?: string,
+    TaskFinishedAt?: string
   ) {
     super(id);
     this.TaskDetails = new TaskDetails(TaskName, TaskDescription);
-    this.TaskDates = new TaskDates(TaskDeadline);
+    this.TaskDates = new TaskDates(TaskDeadline, TaskCreatedAt, TaskFinishedAt);
+    this._UserID = UserID;
   }
 
   FinishTask() {
@@ -49,5 +54,9 @@ export class Task extends EntityBase {
 
   setTaskDetails(TaskDetails: TaskDetails) {
     this.TaskDetails = TaskDetails;
+  }
+
+  get UserID(): string {
+    return this._UserID;
   }
 }

@@ -7,6 +7,7 @@ import { RootState } from "../Redux/configureStore";
 import { UserAPI } from "./API/UserAPI";
 import { IUser } from "../../../DTO/User.DTO";
 import { User } from "../../../Domain/Entities/User.entity";
+import { APIError } from "../../../Exceptions/APIErrors";
 
 export const useUserAPI = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,9 @@ export const useUserAPI = () => {
 
   const AuthenticateUser = async (username: string, password: string) => {
     const response = await UserDB.findByProperty("username", username).catch(
-      (err) => alert(err)
+      (err) => {
+        throw new APIError(err.message);
+      }
     );
 
     const { Username, Password, Email, _id, __v } = response[0];
@@ -28,7 +31,7 @@ export const useUserAPI = () => {
       if (Password === password) {
         ReadUserID(_id);
       } else {
-        alert("Invalid Password");
+        throw new APIError("Invalid Password");
       }
     }
   };

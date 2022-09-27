@@ -9,10 +9,18 @@ export class TaskDates {
   private _Deadline: Date;
   private _FinishedAt: Date;
 
-  constructor(_Deadline: Date) {
-    this._CreatedAt = new Date();
-    this._Deadline = _Deadline;
-    this._FinishedAt = new Date(0);
+  constructor(
+    _Deadline: string,
+    _CreatedAt: string = "",
+    _FinishedAt: string = ""
+  ) {
+    _CreatedAt.length > 0
+      ? (this._CreatedAt = new Date(_CreatedAt))
+      : (this._CreatedAt = new Date());
+    this._Deadline = new Date(_Deadline);
+    _FinishedAt.length > 0
+      ? (this._FinishedAt = new Date(_FinishedAt))
+      : (this._FinishedAt = new Date());
   }
 
   set Deadline(_Deadline: Date) {

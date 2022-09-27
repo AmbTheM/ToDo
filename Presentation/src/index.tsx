@@ -4,12 +4,15 @@ import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./Redux/configureStore";
 import App from "./App";
 import { hot } from "react-hot-loader/root";
+import { BrowserRouter as Router } from "react-router-dom";
 const ReactApp = process.env.NODE_ENV === "development" ? hot(App) : App;
 
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <ReactApp />
+      <Router>
+        <ReactApp />
+      </Router>
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById("root")

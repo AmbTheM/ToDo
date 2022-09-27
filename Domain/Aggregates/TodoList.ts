@@ -5,13 +5,21 @@ import { ITaskDetails } from "../ValueObjects/TaskDetails.obj";
 
 export class TodoList {
   private _TaskList: Task[] = [];
+  private UserID: string;
 
-  constructor() {}
+  constructor(UserID: string) {
+    this.UserID = UserID;
+  }
 
-  AddNewTask(TaskName: string, TaskDescription: string, TaskDeadline: Date) {
+  AddNewTask(
+    TaskName: string,
+    TaskDescription: string,
+    TaskDeadline: string,
+    UserID: string
+  ) {
     this._TaskList = [
       ...this._TaskList,
-      new Task(TaskName, TaskDescription, TaskDeadline),
+      new Task(TaskName, TaskDescription, TaskDeadline, UserID),
     ];
   }
 

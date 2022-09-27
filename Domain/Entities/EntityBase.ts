@@ -4,7 +4,7 @@ export abstract class EntityBase {
   id: string = "";
 
   constructor(id: string = "") {
-    id !== "" ? (this.id = id) : this.generateID();
+    id.length > 0 ? (this.id = id) : this.generateID();
   }
 
   get ID(): string {
