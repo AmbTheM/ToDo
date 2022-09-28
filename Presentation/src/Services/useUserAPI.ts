@@ -49,9 +49,9 @@ export const useUserAPI = () => {
         Email: user.Email,
         id: user.ID,
       };
-      UserDB.saveToDb(obj).catch((err) => alert(err));
+      await UserDB.saveToDb(obj);
     } catch (error) {
-      alert(error);
+      throw new APIError(`${error}`);
     }
   };
 

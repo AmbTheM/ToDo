@@ -128,11 +128,7 @@ module.exports = (env, argv) => {
         chunks: "all",
       },
       minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          cache: true,
-        }),
-      ],
+      minimizer: [new TerserPlugin({})],
     };
   }
   return config;

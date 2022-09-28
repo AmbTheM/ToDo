@@ -3,7 +3,7 @@ import { APIError } from "../../../../Exceptions/APIErrors";
 import { IDBPort } from "../../../../Ports/DB.port";
 
 export abstract class DbAPI<T> implements IDBPort<T> {
-  APIURL: string = `http://localhost:9090`;
+  APIURL: string = `http://localhost:9093`;
   protected route: string = "";
 
   async readAllFromDb(): Promise<any> {

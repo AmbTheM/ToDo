@@ -69,56 +69,66 @@ const CreateNewTask: React.FC<props> = ({ showhidestyle, hide, editID }) => {
   };
   return (
     <>
-      <div className={showhidestyle}>
-        <h1 className={style.headings}>
-          {editID.length > 0 ? "Edit Task" : "Create New Task"}
-        </h1>
-        <h1
-          className={style.closebutton}
-          onClick={() => {
-            hide(style.createnewtaskhidden);
-          }}
-        >
-          X
-        </h1>
-        <input
-          className={style.input}
-          type="text"
-          placeholder="Enter Task Name"
-          id="TaskName"
-          name="TaskName"
-          onChange={(e) => {
-            updateTaskName(e.target.value);
-          }}
-        ></input>
-        <input
-          className={style.input}
-          type="text"
-          placeholder="Description"
-          id="TaskDesc"
-          name="TaskDesc"
-          onChange={(e) => {
-            updateTaskDescription(e.target.value);
-          }}
-        ></input>
-        <input
-          className={style.input}
-          type="datetime-local"
-          id="TaskDeadline"
-          name="TaskDeadline"
-          onChange={(e) => {
-            updateDeadline(new Date(e.target.value));
-          }}
-        ></input>
-        <Button
-          onClick={() => {
+      <div className={style.createnewpagecenter}>
+        <form
+          className={showhidestyle}
+          onSubmit={(e) => {
+            e.preventDefault();
             editID.length > 0
               ? EditTask(TaskName, TaskDescription, Deadline)
               : AddNewTask(TaskName, TaskDescription, Deadline);
           }}
-          text="Submit"
-          style={style.button}
-        />
+        >
+          <h1 className={style.headings}>
+            {editID.length > 0 ? "Edit Task" : "Create New Task"}
+          </h1>
+          <h1
+            className={style.closebutton}
+            onClick={() => {
+              hide(style.createnewtaskhidden);
+            }}
+          >
+            X
+          </h1>
+          <input
+            className={style.input}
+            type="text"
+            placeholder="Enter Task Name"
+            id="TaskName"
+            name="TaskName"
+            required={true}
+            onChange={(e) => {
+              updateTaskName(e.target.value);
+            }}
+          ></input>
+          <input
+            className={style.input}
+            type="text"
+            placeholder="Description"
+            id="TaskDesc"
+            name="TaskDesc"
+            required={true}
+            onChange={(e) => {
+              updateTaskDescription(e.target.value);
+            }}
+          ></input>
+          <input
+            className={style.input}
+            type="datetime-local"
+            id="TaskDeadline"
+            name="TaskDeadline"
+            required={true}
+            onChange={(e) => {
+              updateDeadline(new Date(e.target.value));
+            }}
+          ></input>
+          <Button
+            onClick={() => {}}
+            text="Submit"
+            style={style.button}
+            type="submit"
+          />
+        </form>
       </div>
     </>
   );

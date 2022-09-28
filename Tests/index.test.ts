@@ -1,4 +1,3 @@
-import { TodoList } from "../Domain/Aggregates/TodoList";
 import { Task } from "../Domain/Entities/Task.entity";
 import { User } from "../Domain/Entities/User.entity";
 import { Email } from "../Domain/ValueObjects/Email.obj";

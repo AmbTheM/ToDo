@@ -49,8 +49,9 @@ const TaskPage: React.FC = () => {
 
   return (
     <>
+      <CreateNewTask showhidestyle={isShown} hide={Show} editID={editID} />
+
       <div className={style.taskpage}>
-        <CreateNewTask showhidestyle={isShown} hide={Show} editID={editID} />
         <div className={style.taskpageflex}>
           <Button
             text="Add Task"

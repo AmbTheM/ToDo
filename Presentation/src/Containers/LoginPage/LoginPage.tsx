@@ -32,16 +32,23 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <LabelMessage message={message} style={messagestyle} />
-
-      <form className={style.loginpage}>
+      <form
+        className={style.loginpage}
+        onSubmit={(e) => {
+          e.preventDefault();
+          Submit(username, password);
+        }}
+      >
         <h1 className={style.headings}>Welcome to Todo App.</h1>
+        <LabelMessage message={message} style={messagestyle} />
+
         <input
           className={style.input}
           placeholder="Please Enter Username"
           type="text"
           id="username"
           name="username"
+          required={true}
           onChange={(e) => {
             setusername(e.target.value);
           }}
@@ -52,6 +59,7 @@ const LoginPage: React.FC = () => {
           type="password"
           id="password"
           name="password"
+          required={true}
           onChange={(e) => {
             setpassword(e.target.value);
           }}
@@ -60,9 +68,8 @@ const LoginPage: React.FC = () => {
           <Button
             style={style.button}
             text={"Login"}
-            onClick={async () => {
-              Submit(username, password);
-            }}
+            onClick={() => {}}
+            type="submit"
           ></Button>
           <Button
             style={style.button}
