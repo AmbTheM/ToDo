@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import UserDb from "../Models/User.db.model";
+import jwt from "jsonwebtoken";
 
 const createUser = (req: Request, res: Response, next: NextFunction) => {
   const { Username, Password, Email, id } = req.body;
@@ -31,7 +32,7 @@ const createUser = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const readUser = (req: Request, res: Response, next: NextFunction) => {
-  const userID = req.params.userID;
+  const { userID } = req.body;
 
   return UserDb.findById(userID)
     .then((user) => {
@@ -49,18 +50,22 @@ const readAllUsers = (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-const findUsername = (req: Request, res: Response, next: NextFunction) => {
-  return UserDb.find({ Username: req.params.Username })
+const findUser = (req: Request, res: Response, next: NextFunction) => {
+  return UserDb.find({
+    Username: req.body.Username,
+  })
     .then((user) => {
       user.length !== 0
-        ? res.status(200).json({ user })
-        : res.status(404).json({ message: "Username not found" });
+        ? user[0].Password === req.body.Password
+          ? createUserIDToken({ _id: user[0]._id }, res)
+          : res.status(404).json({ message: "Wrong Password" })
+        : res.status(404).json({ message: "User not found" });
     })
     .catch((error) => res.status(500).json({ error }));
 };
 
 const findEmail = (req: Request, res: Response, next: NextFunction) => {
-  return UserDb.find({ Email: req.params.Email })
+  return UserDb.find({ Email: req.body.Email })
     .then((user) => {
       user
         ? res.status(200).json({ user })
@@ -101,12 +106,17 @@ const deleteUser = (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
+const createUserIDToken = (obj: any, res: Response) => {
+  const token = jwt.sign(obj, "Secuewq0r8i3yu425tr89ghsdcheOUT-92134YT0NW");
+  res.status(200).json({ token });
+};
+
 export default {
   createUser,
   deleteUser,
   updateUser,
   readAllUsers,
   readUser,
-  findUsername,
+  findUser,
   findEmail,
 };

@@ -5,6 +5,7 @@ import { IDBPort } from "../../../../Ports/DB.port";
 export abstract class DbAPI<T> implements IDBPort<T> {
   APIURL: string = `http://localhost:9093`;
   protected route: string = "";
+  protected config: any = {};
 
   async readAllFromDb(): Promise<any> {
     const response: any = await axios
@@ -27,7 +28,7 @@ export abstract class DbAPI<T> implements IDBPort<T> {
 
   async saveToDb(obj: T) {
     const response: any = await axios
-      .post(`${this.APIURL}/${this.route}/create`, obj)
+      .post(`${this.APIURL}/${this.route}/create`, obj, this.config)
       .catch((err) => {
         throw new APIError(err.response.data.message);
       });
@@ -36,7 +37,7 @@ export abstract class DbAPI<T> implements IDBPort<T> {
 
   async deleteFromDb(id: string) {
     const response: any = await axios
-      .delete(`${this.APIURL}/${this.route}/delete/${id}`)
+      .delete(`${this.APIURL}/${this.route}/delete/${id}`, this.config)
       .catch((err) => {
         throw new Error(err);
       });
@@ -45,14 +46,14 @@ export abstract class DbAPI<T> implements IDBPort<T> {
 
   async updateDb(id: string, obj: T) {
     const response: any = await axios
-      .patch(`${this.APIURL}/${this.route}/update/${id}`, obj)
+      .patch(`${this.APIURL}/${this.route}/update/${id}`, obj, this.config)
       .catch((err) => {
         throw new Error(err);
       });
     console.log(response.status);
   }
 
-  async findByProperty(Property: string, Query: string) {
+  async findDB(Property_1: string, Property_2: string) {
     return "Not Impletmented";
   }
 }

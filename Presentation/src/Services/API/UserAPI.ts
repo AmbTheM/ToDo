@@ -9,12 +9,13 @@ export class UserAPI extends DbAPI<IUser> {
     this.route = "user";
   }
 
-  async findByProperty(Property: string, Query: string) {
+  async findDB(Username: string, Password: string) {
+    const userQuery = { Username, Password };
     const response: any = await axios
-      .get(`${this.APIURL}/${this.route}/get/${Property}/${Query}`)
+      .post(`${this.APIURL}/${this.route}/login`, userQuery)
       .catch((err) => {
         throw new APIError(err.response.data.message);
       });
-    return response.data[this.route];
+    return response.data;
   }
 }

@@ -19,21 +19,10 @@ export const useUserAPI = () => {
   const UserID = useSelector((state: RootState) => state.UserIDReducer);
 
   const AuthenticateUser = async (username: string, password: string) => {
-    const response = await UserDB.findByProperty("username", username).catch(
-      (err) => {
-        throw new APIError(err.message);
-      }
-    );
-
-    const { Username, Password, Email, _id, __v } = response[0];
-
-    if (Username === username) {
-      if (Password === password) {
-        ReadUserID(_id);
-      } else {
-        throw new APIError("Invalid Password");
-      }
-    }
+    const response = await UserDB.findDB(username, password).catch((err) => {
+      throw new APIError(err.message);
+    });
+    ReadUserID(response.token);
   };
 
   const CreateUser = async (

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import TaskDb from "../Models/Task.db.model";
 const createTask = (req: Request, res: Response, next: NextFunction) => {
   const {
@@ -11,13 +12,16 @@ const createTask = (req: Request, res: Response, next: NextFunction) => {
     id,
   } = req.body;
 
+  const ConvertedID = jwt.decode(UserId);
+  console.log(UserId);
+
   const task = new TaskDb({
     TaskName,
     TaskDescription,
     CreatedAt,
     Deadline,
     FinishedAt,
-    UserId,
+    UserId: ConvertedID,
     _id: id,
   });
 
@@ -39,7 +43,7 @@ const readTask = (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => res.status(500).json({ error }));
 };
 const readAllTasks = (req: Request, res: Response, next: NextFunction) => {
-  return TaskDb.find({ UserId: req.params.userID })
+  return TaskDb.find({ UserId: req.body.userID })
     .then((task) => {
       task
         ? res.status(200).json({ task })

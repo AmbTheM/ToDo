@@ -8,6 +8,11 @@ export class TaskAPI extends DbAPI<ITask> {
     super();
     this.route = "task";
     this.UserID = UserID;
+    this.config = {
+      headers: {
+        authorization: `Bearer ${this.UserID}`,
+      },
+    };
   }
 
   async readAllFromDb(): Promise<any> {
@@ -16,7 +21,7 @@ export class TaskAPI extends DbAPI<ITask> {
 
   async readAllUsersFromDb(userID: string): Promise<any> {
     const response: any = await axios
-      .get(`${this.APIURL}/${this.route}/getU/${userID}`)
+      .post(`${this.APIURL}/${this.route}/get`, { userID }, this.config)
       .catch((err) => {
         throw new Error(err);
       });

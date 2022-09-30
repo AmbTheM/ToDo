@@ -12,5 +12,5 @@ export interface IDBPort<T> {
 
   updateDb(id: string, obj: T): void;
 
-  findByProperty(Property: string, Query: string): Promise<any>;
+  findDB(Property: string, Query: string): Promise<any>;
 }
