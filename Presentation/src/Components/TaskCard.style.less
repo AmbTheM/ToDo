@@ -1,0 +1,72 @@
+@import "../styles/main.less";
+
+.taskbody {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  max-height: 250px;
+  font-family: monospace;
+  box-shadow: 9px 16px 83px 7px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 9px 16px 83px 7px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 9px 16px 83px 7px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.heading {
+  background-color: #003459;
+  display: flex;
+  padding-left: 15px;
+  padding-right: 15px;
+  justify-content: space-between;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.taskname {
+  color: white;
+  font-size: large;
+  margin-right: 25px;
+}
+
+.footing {
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.createdat {
+  color: white;
+  align-self: flex-end;
+}
+
+.description {
+  padding: 15px;
+}
+
+.emojicontainer {
+  display: flex;
+}
+
+.emojibutton {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  font-size: x-large;
+  cursor: pointer;
+  justify-self: center;
+  margin: 5.5px;
+}
+
+.emojibutton:hover {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  font-size: x-large;
+  cursor: pointer;
+  justify-self: center;
+  margin: 5.5px;
+  transform: scale(1.15);
+  transition: 144ms;
+}
